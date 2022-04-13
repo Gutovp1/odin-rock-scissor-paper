@@ -35,9 +35,21 @@ function playerPlay(){
     return lower_response;
 }
 
-//const playerSelection = 'rock';
+function game(){
+    let score = 0;
+    for(let i=0;i<5;i++){
+        playerSelection = playerPlay();
+        computerSelection = computerPlay();
+        playRound(playerSelection,computerSelection);
+        console.log(playerSelection);
+        console.log(computerSelection);
+        console.log(playRound(playerSelection,computerSelection));
+    }
+}
+
 let playerSelection = playerPlay();
-const computerSelection = computerPlay();
+let computerSelection = computerPlay();
 console.log(playerSelection);
 console.log(computerSelection);
 console.log(playRound(playerSelection,computerSelection));
+game();
