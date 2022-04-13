@@ -24,32 +24,47 @@ function playerPlay(){
     let validAnswer = false;
     while(!validAnswer){
         response = prompt("Write your answer down: paper, rock or scissor.");
-        lower_response = response.toLowerCase();
-        if(lower_response == "rock" || lower_response == "scissor" || lower_response == "paper"){
+        lowerResponse = response.toLowerCase();
+        if(lowerResponse == "rock" || lowerResponse == "scissor" || lowerResponse == "paper"){
           validAnswer=true;
         }else {    
             response = prompt("Write a valid choice: rock, paper or scissor.");
-            lower_response = response.toLowerCase();
+            lowerResponse = response.toLowerCase();
         }
     }
-    return lower_response;
+    return lowerResponse;
+}
+
+function checkScore(numberOfWins, numberOfLosses, numberOfRounds){
+    if(numberOfWins == numberOfLosses){
+        finalResult = 'There was a draw with final score: '+numberOfWins+' x '+numberOfLosses+".";
+    }else if(numberOfWins > numberOfLosses){
+        finalResult = 'You rocked and won the game. You beat the computer '+numberOfWins+' and lost '+numberOfLosses+' times.';
+    }else {
+        finalResult = 'Computer won the game. You lost '+numberOfLosses +' rounds and won '+numberOfWins+'.';
+    }
+    return finalResult;
 }
 
 function game(){
-    let score = 0;
-    for(let i=0;i<5;i++){
+    let winScore = 0;
+    let lossScore = 0;
+    let numberOfRounds = 5;
+    for(let i=0;i<numberOfRounds;i++){
         playerSelection = playerPlay();
         computerSelection = computerPlay();
-        playRound(playerSelection,computerSelection);
+        resultRound = playRound(playerSelection,computerSelection);
         console.log(playerSelection);
         console.log(computerSelection);
         console.log(playRound(playerSelection,computerSelection));
+        if (resultRound.includes('won'))
+        {   winScore++;
+        } else if(resultRound.includes('lost')){
+            lossScore++;
+        }        
     }
+    gameResult = checkScore(winScore,lossScore, numberOfRounds);
+    return gameResult;
 }
 
-let playerSelection = playerPlay();
-let computerSelection = computerPlay();
-console.log(playerSelection);
-console.log(computerSelection);
-console.log(playRound(playerSelection,computerSelection));
-game();
+console.log(game());
