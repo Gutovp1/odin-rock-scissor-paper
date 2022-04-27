@@ -1,8 +1,11 @@
+//game beginning
+let playerScore = 0;
+let computerScore = 0;
 
 function computerPlay(){
-    let pcplay = ['rock','scissor','paper'];
+    let pcPlay = ['rock','scissor','paper'];
     let index = Math.floor((Math.random()*10))%3;
-    return pcplay[index];
+    return pcPlay[index];
 }
 
 function playRound(playerSelection,computerSelection){
@@ -45,26 +48,57 @@ function checkScore(numberOfWins, numberOfLosses, numberOfRounds){
     }
     return finalResult;
 }
+//five rounds game, in which the user enters a prompt answer each round
 
-function game(){
-    let winScore = 0;
-    let lossScore = 0;
-    let numberOfRounds = 5;
-    for(let i=0;i<numberOfRounds;i++){
-        playerSelection = playerPlay();
-        computerSelection = computerPlay();
-        resultRound = playRound(playerSelection,computerSelection);
-        console.log(playerSelection);
-        console.log(computerSelection);
-        console.log(playRound(playerSelection,computerSelection));
-        if (resultRound.includes('won'))
-        {   winScore++;
-        } else if(resultRound.includes('lost')){
-            lossScore++;
-        }        
-    }
-    gameResult = checkScore(winScore,lossScore, numberOfRounds);
-    return gameResult;
-}
+// function game(){
+//     let winScore = 0;
+//     let lossScore = 0;
+//     let numberOfRounds = 5;
+//     for(let i=0;i<numberOfRounds;i++){
+//         playerSelection = playerPlay();
+//         computerSelection = computerPlay();
+//         resultRound = playRound(playerSelection,computerSelection);
+//         console.log(playerSelection);
+//         console.log(computerSelection);
+//         console.log(playRound(playerSelection,computerSelection));
+//         if (resultRound.includes('won'))
+//         {   winScore++;
+//         } else if(resultRound.includes('lost')){
+//             lossScore++;
+//         }        
+//     }
+//     gameResult = checkScore(winScore,lossScore, numberOfRounds);
+//     return gameResult;
+// }
 
-console.log(game());
+//console.log(game());
+
+const score = document.getElementById('score');
+
+const btnRock = document.getElementById('btn-rock');
+btnRock.addEventListener('click',() => {
+   playerSelection = 'rock';
+   computerSelection = computerPlay();
+   console.log(playerSelection);
+   console.log(computerSelection);
+   score.textContent = playRound(playerSelection, computerSelection);   
+} );
+
+const btnPaper = document.getElementById('btn-paper');
+btnPaper.addEventListener('click',() => {
+    playerSelection = 'paper';
+    computerSelection = computerPlay();
+    console.log(playerSelection);
+    console.log(computerSelection);
+    score.textContent = playRound(playerSelection, computerSelection);
+});
+
+const btnScissor = document.getElementById('btn-scissor');
+btnScissor.addEventListener('click',() =>{
+    playerSelection = 'scissor';
+    computerSelection = computerPlay();
+    console.log(playerSelection);
+    console.log(computerSelection);
+    score.textContent = playRound(playerSelection, computerSelection);
+});
+
