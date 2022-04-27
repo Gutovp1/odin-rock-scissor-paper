@@ -15,38 +15,43 @@ function playRound(playerSelection,computerSelection){
     else {
         if((playerSelection == 'rock' && computerSelection == 'scissor') || (playerSelection == 'scissor' && computerSelection == 'paper') || (playerSelection == 'paper' && computerSelection == 'rock')){
             result = "You won. Because, "+ playerSelection +" beats "+ computerSelection +".";
+            playerScore++;
         }else{
             result = "You lost. Because, "+ playerSelection +" is beaten by "+ computerSelection +".";
+            computerScore++;
         }
         
     }
     return result;
 }
 
-function playerPlay(){
-    let validAnswer = false;
-    while(!validAnswer){
-        response = prompt("Write your answer down: paper, rock or scissor.");
-        lowerResponse = response.toLowerCase();
-        if(lowerResponse == "rock" || lowerResponse == "scissor" || lowerResponse == "paper"){
-          validAnswer=true;
-        }else {    
-            response = prompt("Write a valid choice: rock, paper or scissor.");
-            lowerResponse = response.toLowerCase();
-        }
-    }
-    return lowerResponse;
-}
+// function playerPlay(){
+//     let validAnswer = false;
+//     while(!validAnswer){
+//         response = prompt("Write your answer down: paper, rock or scissor.");
+//         lowerResponse = response.toLowerCase();
+//         if(lowerResponse == "rock" || lowerResponse == "scissor" || lowerResponse == "paper"){
+//           validAnswer=true;
+//         }else {    
+//             response = prompt("Write a valid choice: rock, paper or scissor.");
+//             lowerResponse = response.toLowerCase();
+//         }
+//     }
+//     return lowerResponse;
+// }
 
-function checkScore(numberOfWins, numberOfLosses, numberOfRounds){
-    if(numberOfWins == numberOfLosses){
-        finalResult = 'There was a draw with final score: '+numberOfWins+' x '+numberOfLosses+".";
-    }else if(numberOfWins > numberOfLosses){
-        finalResult = 'You rocked and won the game. You beat the computer '+numberOfWins+' and lost '+numberOfLosses+' times.';
-    }else {
-        finalResult = 'Computer won the game. You lost '+numberOfLosses +' rounds and won '+numberOfWins+'.';
+function checkScore(){
+    finalResult = '';
+    if(playerScore == 5){
+        finalResult = 'You won the battle with 5 victories! =)';
+        round.textContent = finalResult;
+    }
+    if(computerScore == 5){
+        finalResult = 'You lost the battle. Computer has 5 wins. =(';
+        round.textContent = finalResult;
     }
     return finalResult;
+    
 }
 //five rounds game, in which the user enters a prompt answer each round
 
@@ -74,31 +79,38 @@ function checkScore(numberOfWins, numberOfLosses, numberOfRounds){
 //console.log(game());
 
 const score = document.getElementById('score');
+const round = document.getElementById('round');
 
-const btnRock = document.getElementById('btn-rock');
+const btnRock = document.getElementById('rock');
 btnRock.addEventListener('click',() => {
-   playerSelection = 'rock';
+   playerSelection = btnRock.id;
    computerSelection = computerPlay();
-   console.log(playerSelection);
-   console.log(computerSelection);
-   score.textContent = playRound(playerSelection, computerSelection);   
+   round.textContent = 'You = ' + playerSelection + '  PC = ' + computerSelection;
+   score.textContent = playRound(playerSelection, computerSelection) +
+   '\     Partial score = YOU: ' + playerScore + '     PC: ' + computerScore;   
+   console.log(checkScore());
 } );
 
-const btnPaper = document.getElementById('btn-paper');
+const btnPaper = document.getElementById('paper');
 btnPaper.addEventListener('click',() => {
     playerSelection = 'paper';
     computerSelection = computerPlay();
     console.log(playerSelection);
     console.log(computerSelection);
-    score.textContent = playRound(playerSelection, computerSelection);
+    score.textContent = playRound(playerSelection, computerSelection) +
+   '\     Partial score = YOU: ' + playerScore + '     PC: ' + computerScore;   
+   console.log(checkScore());
 });
 
-const btnScissor = document.getElementById('btn-scissor');
-btnScissor.addEventListener('click',() =>{
+const btnScissor = document.getElementById('scissor');
+btnScissor.addEventListener('click',() => {
     playerSelection = 'scissor';
     computerSelection = computerPlay();
     console.log(playerSelection);
     console.log(computerSelection);
-    score.textContent = playRound(playerSelection, computerSelection);
+    score.textContent = playRound(playerSelection, computerSelection) +
+   '\     Partial score = YOU: ' + playerScore + '     PC: ' + computerScore;   
+   console.log(checkScore());
 });
+
 
