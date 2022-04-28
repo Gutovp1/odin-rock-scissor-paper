@@ -42,13 +42,17 @@ function playRound(playerSelection,computerSelection){
 
 function checkScore(){
     finalResult = '';
-    if(playerScore == 5){
+    if(playerScore >= 5){
         finalResult = 'You won the battle with 5 victories! =)';
         round.textContent = finalResult;
+        playerScore = 0;
+        computerScore = 0;
     }
-    if(computerScore == 5){
+    if(computerScore >= 5){
         finalResult = 'You lost the battle. Computer has 5 wins. =(';
         round.textContent = finalResult;
+        playerScore = 0;
+        computerScore = 0;
     }
     return finalResult;
     
@@ -80,37 +84,45 @@ function checkScore(){
 
 const score = document.getElementById('score');
 const round = document.getElementById('round');
+// const bR = document.createElement('button');
+// bR.setAttribute('id','rock');
+// bR.textContent = 'Rockk';
+// const bod = document.querySelector('.bod');
+// bod.appendChild(bR);
+// bR.addEventListener('click',() => {
+//     playRound(bR.id,computerPlay())
+//     console.log(checkScore());
+// });
+
 
 const btnRock = document.getElementById('rock');
 btnRock.addEventListener('click',() => {
    playerSelection = btnRock.id;
    computerSelection = computerPlay();
-   round.textContent = 'You = ' + playerSelection + '  PC = ' + computerSelection;
+   round.textContent = 'You = ' + playerSelection + '  PC = ' + computerSelection + ' ';
    score.textContent = playRound(playerSelection, computerSelection) +
-   '\     Partial score = YOU: ' + playerScore + '     PC: ' + computerScore;   
-   console.log(checkScore());
+   ' Partial score = YOU: ' + playerScore + ' PC: ' + computerScore;  
+   checkScore(); 
 } );
 
 const btnPaper = document.getElementById('paper');
 btnPaper.addEventListener('click',() => {
     playerSelection = 'paper';
     computerSelection = computerPlay();
-    console.log(playerSelection);
-    console.log(computerSelection);
+    round.textContent = 'You = ' + playerSelection + '  PC = ' + computerSelection + ' ';
     score.textContent = playRound(playerSelection, computerSelection) +
-   '\     Partial score = YOU: ' + playerScore + '     PC: ' + computerScore;   
-   console.log(checkScore());
+    ' Partial score = YOU: ' + playerScore + ' PC: ' + computerScore;   
+    checkScore();
 });
 
 const btnScissor = document.getElementById('scissor');
 btnScissor.addEventListener('click',() => {
     playerSelection = 'scissor';
     computerSelection = computerPlay();
-    console.log(playerSelection);
-    console.log(computerSelection);
+    round.textContent = 'You = ' + playerSelection + '  PC = ' + computerSelection + ' ';
     score.textContent = playRound(playerSelection, computerSelection) +
-   '\     Partial score = YOU: ' + playerScore + '     PC: ' + computerScore;   
-   console.log(checkScore());
+    ' Partial score = YOU: ' + playerScore + ' PC: ' + computerScore;   
+    checkScore();
 });
 
 
