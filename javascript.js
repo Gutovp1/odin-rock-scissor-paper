@@ -10,7 +10,7 @@ function computerPlay(){
 
 function playRound(playerSelection,computerSelection){
     if(playerSelection === computerSelection){
-        result = 'Draw. Play again';
+        result = 'Draw. Play again.';
     }
     else {
         if((playerSelection == 'rock' && computerSelection == 'scissor') || (playerSelection == 'scissor' && computerSelection == 'paper') || (playerSelection == 'paper' && computerSelection == 'rock')){
@@ -24,21 +24,6 @@ function playRound(playerSelection,computerSelection){
     }
     return result;
 }
-
-// function playerPlay(){
-//     let validAnswer = false;
-//     while(!validAnswer){
-//         response = prompt("Write your answer down: paper, rock or scissor.");
-//         lowerResponse = response.toLowerCase();
-//         if(lowerResponse == "rock" || lowerResponse == "scissor" || lowerResponse == "paper"){
-//           validAnswer=true;
-//         }else {    
-//             response = prompt("Write a valid choice: rock, paper or scissor.");
-//             lowerResponse = response.toLowerCase();
-//         }
-//     }
-//     return lowerResponse;
-// }
 
 function checkScore(){
     finalResult = '';
@@ -57,33 +42,10 @@ function checkScore(){
     return finalResult;
     
 }
-//five rounds game, in which the user enters a prompt answer each round
-
-// function game(){
-//     let winScore = 0;
-//     let lossScore = 0;
-//     let numberOfRounds = 5;
-//     for(let i=0;i<numberOfRounds;i++){
-//         playerSelection = playerPlay();
-//         computerSelection = computerPlay();
-//         resultRound = playRound(playerSelection,computerSelection);
-//         console.log(playerSelection);
-//         console.log(computerSelection);
-//         console.log(playRound(playerSelection,computerSelection));
-//         if (resultRound.includes('won'))
-//         {   winScore++;
-//         } else if(resultRound.includes('lost')){
-//             lossScore++;
-//         }        
-//     }
-//     gameResult = checkScore(winScore,lossScore, numberOfRounds);
-//     return gameResult;
-// }
-
-//console.log(game());
 
 const score = document.getElementById('score');
 const round = document.getElementById('round');
+const desc = document.getElementById('description');
 // const bR = document.createElement('button');
 // bR.setAttribute('id','rock');
 // bR.textContent = 'Rockk';
@@ -96,33 +58,19 @@ const round = document.getElementById('round');
 
 
 const btnRock = document.getElementById('rock');
-btnRock.addEventListener('click',() => {
-   playerSelection = btnRock.id;
-   computerSelection = computerPlay();
-   round.textContent = 'You = ' + playerSelection + '  PC = ' + computerSelection + ' ';
-   score.textContent = playRound(playerSelection, computerSelection) +
-   ' Partial score = YOU: ' + playerScore + ' PC: ' + computerScore;  
-   checkScore(); 
-} );
+btnRock.addEventListener('click',() => display(btnRock.id, computerPlay()));
 
 const btnPaper = document.getElementById('paper');
-btnPaper.addEventListener('click',() => {
-    playerSelection = 'paper';
-    computerSelection = computerPlay();
-    round.textContent = 'You = ' + playerSelection + '  PC = ' + computerSelection + ' ';
-    score.textContent = playRound(playerSelection, computerSelection) +
-    ' Partial score = YOU: ' + playerScore + ' PC: ' + computerScore;   
-    checkScore();
-});
+btnPaper.addEventListener('click',() => display(btnPaper.id, computerPlay()));
 
 const btnScissor = document.getElementById('scissor');
-btnScissor.addEventListener('click',() => {
-    playerSelection = 'scissor';
-    computerSelection = computerPlay();
-    round.textContent = 'You = ' + playerSelection + '  PC = ' + computerSelection + ' ';
-    score.textContent = playRound(playerSelection, computerSelection) +
-    ' Partial score = YOU: ' + playerScore + ' PC: ' + computerScore;   
-    checkScore();
-});
+btnScissor.addEventListener('click',() => display(btnScissor.id, computerPlay()));
 
+function display (playerPlay, pcPlay) {
+    round.textContent = playerPlay.toUpperCase() + ' X ' + pcPlay.toUpperCase();
+    desc.textContent = playRound(playerPlay, pcPlay);
+    score.textContent = 'Score = YOU: ' + playerScore + ' PC: ' + computerScore;   
+    checkScore();
+    return;
+}
 
